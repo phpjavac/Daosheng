@@ -1,44 +1,27 @@
-import { MockMethod } from 'vite-plugin-mock'
-
-
+import { MockMethod } from "vite-plugin-mock";
+import mock from "mockjs";
 export default [
-    {
-      url: '/api/get',
-      method: 'get',
-      response: ({ query }) => {
-        return {
-          code: 0,
-          data: {
-            name: '@time',
-          },
-        }
-      },
-    },
-    {
-      url: '/api/post',
-      method: 'post',
-      timeout: 2000,
-      response: {
-        code: 0,
+  /**
+   * 练习
+   * @return { name -> 练习名称  }
+   */
+  {
+    url: "/api/practice/getPractice",
+    method: "get",
+    response: ({}) => {
+      return {
+        success: true,
+        message: null,
         data: {
-          name: 'vben',
+          id: "@uid",
+          practiceType: "专项练习",
+          userId: "@guid",
+          name: "@cname",
+          createTime: "@datetime",
+          courseId: "@guid",
+          complete: false,
         },
-      },
+      };
     },
-    {
-      url: '/api/text',
-      method: 'post',
-      rawResponse: async (req, res) => {
-        let reqbody = ''
-        await new Promise((resolve) => {
-          req.on('data', (chunk) => {
-            reqbody += chunk
-          })
-          req.on('end', () => resolve(undefined))
-        })
-        res.setHeader('Content-Type', 'text/plain')
-        res.statusCode = 200
-        res.end(`hello, ${reqbody}`)
-      },
-    },
-  ] as MockMethod[]
+  },
+] as MockMethod[];
