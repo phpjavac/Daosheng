@@ -13,6 +13,8 @@ module.exports = {
   rules: {
     "prettier/prettier": "error",
     "vue/no-multiple-template-root": "off", // vue3允许有多个根元素
+    "import/no-extraneous-dependencies": "off", // package 引入包
+    "no-console": "off",
   },
   globals: {
     defineProps: "readonly",
