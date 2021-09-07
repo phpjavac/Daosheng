@@ -132,12 +132,14 @@ export default defineComponent({
     .choiceOption
         .option
                 display flex
+                margin-bottom 30px
             .optionTag
                 padding 16px
         .selectOption
                 border 1px solid #1890ff
                 display flex
                 border-radius 6px
+                margin-bottom 30px
             .selectOptionTag
                 padding 16px 
                 background-color #1890ff

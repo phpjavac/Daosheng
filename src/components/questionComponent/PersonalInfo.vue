@@ -1,20 +1,40 @@
 <template>
-<div class="personalInfo">
-<div>学生姓名：<span>{{'郭一'}}</span></div>
-<div>班级：<span>{{'郭一'}}</span></div>
-<div>院系：<span>{{'郭一'}}</span></div>
-<div>总分：<span>{{'郭一'}}</span></div>
-</div>
+    <div class="personalInfo">
+        <div>
+            学生姓名：
+            <span>{{ personalInfoData.name }}</span>
+        </div>
+        <div>
+            班级：
+            <span>{{ personalInfoData.theClass }}</span>
+        </div>
+        <div>
+            院系：
+            <span>{{ personalInfoData.system }}</span>
+        </div>
+        <div>
+            总分：
+            <span>{{ personalInfoData.totlaScore}}</span>
+        </div>
+    </div>
 </template>
 
 <script lang='ts'>
-import { defineComponent, ref } from 'vue';
+import { defineComponent, toRefs } from 'vue';
 
 export default defineComponent({
-components: {},
-setup(){
-    return{}
-}
+    components: {},
+    props: {
+        personalInfoData: {
+            type: Object,
+            default: {
+                name: '姓名',
+                theClass: '班级一',
+                system: '院系一',
+                totlaScore: 100,
+            }
+        }
+    },
 })
 </script>
 

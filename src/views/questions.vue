@@ -2,10 +2,11 @@
     <div class="mainwrapper">
         <div class="main">
             <div>
-                <PersonalInfo />
+                <PersonalInfo :personalInfoData="personalInfoData" />
             </div>
+            <div v-if="mainPageData.length">
             <div v-for="(item,index) in mainPageData" :key="index">
-                <div class="title">{{ `子卷体系${index + 1}（共${item.question.length}道题）` }}</div>
+                <div class="title">{{ `子卷体系${Number(index) + 1}（共${item.question.length}道题）` }}</div>
                 <div
                     class="content"
                     v-for="(items,index1) in item.question"
@@ -26,6 +27,7 @@
                     </div>
                 </div>
             </div>
+            </div>
             <div class="card">
                 <AnswerSheet :answerPropData="mainPageData" @onJump="onJumpFunc" />
             </div>
@@ -34,16 +36,23 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, ref, reactive, toRaw } from 'vue';
+import { defineComponent, ref, reactive, toRaw, onMounted, computed, watch } from 'vue';
 import SingleChoice from '../components/questionComponent/SingleChoice.vue';
 import MultipleChoice from '../components/questionComponent/MultipleChoice.vue';
 import InsertQuestion from '../components/questionComponent/InsertQuestion.vue';
 import JustifyChoice from '../components/questionComponent/JustifyChoice.vue';
 import AnswerSheet from '../components/questionComponent/AnswerSheet.vue';
 import PersonalInfo from '../components/questionComponent/PersonalInfo.vue';
-
-
-
+import useRequest from "../../packages/composition/composition/src/useRequest";
+interface Hitokoto {
+    code: number;
+    data: {
+        name: string;
+        theClass: string;
+        system: number;
+        totlaScore: number;
+    }
+}
 export default defineComponent({
     components: {
         PersonalInfo,
@@ -55,80 +64,36 @@ export default defineComponent({
     },
     setup() {
         const onJumpFunc = (locationId: string) => {
-            console.log('locationId',locationId);
+            console.log('locationId', locationId);
             window.location.href = `#${locationId}`
         };
-        const mainPageData = ref([{
-            pageNumber: 1,
-            question: [
-                {
-                    id: '001',
-                    index: 1,
-                    type: '单选题',
-                    questionContent: '单选题目',
-                    meta: "[\"<p>阿打算</p>\",\"<p>分手</p>\",\"<p>官方</p>\",\"<p>发顺丰的 </p>\"]",
-                    answer: {
-                        isFlag: false,
-                        isHeartFlag: false,
-                        answer: ''
-                    },
-                },
-                {
-                    id: '002',
-                    index: 2,
-                    type: '多选题',
-                    questionContent: '多选题目',
-                    meta: "[\"<p>阿打算</p>\",\"<p>分手</p>\",\"<p>官方</p>\",\"<p>发顺丰的 </p>\"]",
-                    answer: {
-                        isFlag: false,
-                        isHeartFlag: false,
-                        answer: ''
-                    },
-                },
-                {
-                    id: '003',
-                    index: 3,
-                    type: '填空题',
-                    questionContent: '填空题目',
-                    meta: '',
-                    answer: {
-                        isFlag: false,
-                        isHeartFlag: false,
-                        answer: ''
-                    },
-                },
-                {
-                    id: '004',
-                    index: 4,
-                    type: '判断题',
-                    questionContent: '判断题目',
-                    meta: '',
-                    answer: {
-                        isFlag: false,
-                        isHeartFlag: false,
-                        answer: ''
-                    },
-                }
-            ]
-        },
-        {
-            pageNumber: 1,
-            question: [
-                {
-                    id: '011',
-                    index: 1,
-                    type: '单选题',
-                    questionContent: '单选题目',
-                    meta: "[\"<p>阿打算</p>\",\"<p>分手</p>\",\"<p>官方</p>\",\"<p>发顺丰的 </p>\"]",
-                    answer: {
-                        isFlag: false,
-                        isHeartFlag: false,
-                        answer: ''
-                    },
-                },]
-        }])
+        const personalInfoData = ref({});
+        const mainPageData = ref<any>([]);
+        onMounted(()=>{
+            const { error, loading: loadingRes, response: perRes } = useRequest<Hitokoto>({
+                url: "api/questionPerInfo",
+                method: "post",
+            });
+            const { error: pageError, loading: pageLoading, response: pageRes } = useRequest<any>({
+                url: "api/questionPageData",
+                method: "post",
+            });
 
-        return { mainPageData,onJumpFunc }
+            watch(() => loadingRes.value, (v) => {
+                if (!v) {
+                    personalInfoData.value = perRes.value.data;
+                    console.log('perRes', personalInfoData.value)
+                }
+            });
+            watch(() => pageLoading.value, (v) => {
+                if (!v) {
+                    console.log('pageRes', pageRes.value.data)
+                    mainPageData.value = pageRes.value.data.pageItem
+                }
+            });
+        });
+
+        return { mainPageData, onJumpFunc, personalInfoData }
     }
 })
 </script>
