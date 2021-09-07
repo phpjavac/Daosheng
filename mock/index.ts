@@ -1,5 +1,5 @@
 import { MockMethod } from 'vite-plugin-mock'
-
+import mock from "mockjs";
 
 export default [
   /**

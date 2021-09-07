@@ -5,28 +5,28 @@
                 <PersonalInfo :personalInfoData="personalInfoData" />
             </div>
             <div v-if="mainPageData.length">
-            <div v-for="(item,index) in mainPageData" :key="index">
-                <div class="title">{{ `子卷体系${Number(index) + 1}（共${item.question.length}道题）` }}</div>
-                <div
-                    class="content"
-                    v-for="(items,index1) in item.question"
-                    :key="index1"
-                    :id="items.id"
-                >
-                    <div v-if="items.type === '单选题'">
-                        <SingleChoice :singlePropData="items" v-model:answer="items.answer" />
-                    </div>
-                    <div v-if="items.type === '多选题'">
-                        <MultipleChoice :mulPropData="items" v-model:answer="items.answer" />
-                    </div>
-                    <div v-if="items.type === '填空题'">
-                        <InsertQuestion :insertPropData="items" v-model:answer="items.answer" />
-                    </div>
-                    <div v-if="items.type === '判断题'">
-                        <JustifyChoice :justifyPropData="items" v-model:answer="items.answer" />
+                <div v-for="(item,index) in mainPageData" :key="index">
+                    <div class="title">{{ `子卷体系${Number(index) + 1}（共${item.question.length}道题）` }}</div>
+                    <div
+                        class="content"
+                        v-for="(items,index1) in item.question"
+                        :key="index1"
+                        :id="items.id"
+                    >
+                        <div v-if="items.type === '单选题'">
+                            <SingleChoice :singlePropData="items" v-model:answer="items.answer" />
+                        </div>
+                        <div v-if="items.type === '多选题'">
+                            <MultipleChoice :mulPropData="items" v-model:answer="items.answer" />
+                        </div>
+                        <div v-if="items.type === '填空题'">
+                            <InsertQuestion :insertPropData="items" v-model:answer="items.answer" />
+                        </div>
+                        <div v-if="items.type === '判断题'">
+                            <JustifyChoice :justifyPropData="items" v-model:answer="items.answer" />
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
             <div class="card">
                 <AnswerSheet :answerPropData="mainPageData" @onJump="onJumpFunc" />
@@ -36,7 +36,7 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, ref, reactive, toRaw, onMounted, computed, watch } from 'vue';
+import { defineComponent, ref, onMounted,  watch } from 'vue';
 import SingleChoice from '../components/questionComponent/SingleChoice.vue';
 import MultipleChoice from '../components/questionComponent/MultipleChoice.vue';
 import InsertQuestion from '../components/questionComponent/InsertQuestion.vue';
@@ -52,6 +52,26 @@ interface Hitokoto {
         system: number;
         totlaScore: number;
     }
+}
+interface questionPage {
+    code: number;
+    data: {
+        pageItem: {
+            pageNumber: number;
+            question: {
+                id: string;
+                index: number;
+                type: string;
+                questionContent: string;
+                meta: string;
+                answer: {
+                    isFlag: boolean;
+                    isHeartFlag: boolean;
+                    answer: string;
+                }
+            }
+        }[];
+    };
 }
 export default defineComponent({
     components: {
@@ -69,23 +89,23 @@ export default defineComponent({
         };
         const personalInfoData = ref({});
         const mainPageData = ref<any>([]);
-        onMounted(()=>{
+        onMounted(() => {
             const { error, loading: loadingRes, response: perRes } = useRequest<Hitokoto>({
                 url: "api/questionPerInfo",
                 method: "post",
             });
-            const { error: pageError, loading: pageLoading, response: pageRes } = useRequest<any>({
+            const { error: pageError, loading: pageLoading, response: pageRes } = useRequest<questionPage>({
                 url: "api/questionPageData",
                 method: "post",
             });
 
-            watch(() => loadingRes.value, (v) => {
+            watch(() => loadingRes.value, (v:boolean) => {
                 if (!v) {
                     personalInfoData.value = perRes.value.data;
                     console.log('perRes', personalInfoData.value)
                 }
             });
-            watch(() => pageLoading.value, (v) => {
+            watch(() => pageLoading.value, (v:boolean) => {
                 if (!v) {
                     console.log('pageRes', pageRes.value.data)
                     mainPageData.value = pageRes.value.data.pageItem
