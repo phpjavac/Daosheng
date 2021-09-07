@@ -84,7 +84,6 @@ export default defineComponent({
     },
     setup() {
         const onJumpFunc = (locationId: string) => {
-            console.log('locationId', locationId);
             window.location.href = `#${locationId}`
         };
         const personalInfoData = ref({});
@@ -102,12 +101,10 @@ export default defineComponent({
             watch(() => loadingRes.value, (v:boolean) => {
                 if (!v) {
                     personalInfoData.value = perRes.value.data;
-                    console.log('perRes', personalInfoData.value)
                 }
             });
             watch(() => pageLoading.value, (v:boolean) => {
                 if (!v) {
-                    console.log('pageRes', pageRes.value.data)
                     mainPageData.value = pageRes.value.data.pageItem
                 }
             });

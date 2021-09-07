@@ -68,12 +68,10 @@ export default defineComponent({
             isFlag.value = !isFlag.value;
         };
         const changeHeartStatus = () => {
-            console.log(1230);
             isHeartFlag.value = !isHeartFlag.value;
         };
         const onSelectFlag = (index: number) => {
             selectFlag.value = index;
-            console.log(isFlag.value, isHeartFlag.value);
             emit('update:answer',
                 {
                     isFlag: !isFlag.value,

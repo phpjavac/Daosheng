@@ -57,7 +57,6 @@ export default defineComponent({
             isFlag.value = !isFlag.value;
         };
         const changeHeartStatus = () => {
-            console.log(1230);
             isHeartFlag.value = !isHeartFlag.value;
         };
         const onChangeInsert = () => {
