@@ -57,7 +57,6 @@ export default defineComponent({
             isFlag.value = !isFlag.value;
         };
         const changeHeartStatus = () => {
-            console.log(1230);
             isHeartFlag.value = !isHeartFlag.value;
         };
         const onChangeInsert = () => {
@@ -105,7 +104,7 @@ export default defineComponent({
              margin-right 20px 
              color red
     .insertContent
-            background-color #cfcfcf
+            background-color #F5F6FD
             height 74px
             line-height 74px
             box-sizing border-box

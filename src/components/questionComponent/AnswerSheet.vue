@@ -17,7 +17,7 @@
         </div>
         <div class="cardWrapper"  ref="cardWrapperDom">
             <div class="cardBox" v-for="(item,index) in answerPropData" :key="index">
-                <div>体系{{ item.pageNumber }}</div>
+                <div class="cardTitle">体系{{ item.pageNumber }}</div>
                 <div class="cardLine">
                     <a
                         @click="jump(items.id)"
@@ -72,22 +72,25 @@ export default defineComponent({
         const isCloseDynamic = ref(false);
         const { answerPropData } = toRefs(props);
         const isCanMove = ref(false);
+        const calcSlideHeight = ref(0); 
         const jump = (id: string) => {
             emit('onJump', id)
         };
         const onOpenCard = () => {
             let calcHeight = 0;
-            answerPropData.value.map((item, index) => { calcHeight += (45 + 42 * Math.ceil(item.question.length / 15)) })
+            answerPropData.value.map((item, index) => { calcHeight += (63 + 42 * Math.ceil(item.question.length / 15)) })
+            calcSlideHeight.value = calcHeight;
             if (!isOpenDynamic.value && !isCloseDynamic.value) {
                 isOpenDynamic.value = true;
                 dynamicDom.value.style.height = `${calcHeight}px`
-                cardWrapperDom.value.style.height = calcHeight+'px'
+                cardWrapperDom.value.style.height = `${calcHeight}px`
                 answerSheet.value.style.top = '-33px';
 
             } else {
                 isOpenDynamic.value = !isOpenDynamic.value;
                 isCloseDynamic.value = !isCloseDynamic.value;
                 dynamicDom.value.style.height = isOpenDynamic.value ? `${calcHeight}px` : '0px';
+                cardWrapperDom.value.style.height = isOpenDynamic.value ? `${calcHeight}px` : '0px';
                 answerSheet.value.style.top = isOpenDynamic.value ?'-33px' :'-35px';
 
             }
@@ -95,7 +98,6 @@ export default defineComponent({
         const onEnterBlock = (e: any) => {
             isCanMove.value = true;
             let targetDivHeight = dynamicDom.value.offsetHeight;
-            let startX = e.clientX;
             let startY = e.clientY;
             document.onmousemove = function (e) {
                 e.preventDefault();
@@ -109,17 +111,22 @@ export default defineComponent({
                 //往下方拖动：
                 if ( e.clientY > startY) {
                     cardWrapperDom.value.style.height = (targetDivHeight - distY) + 'px';
-                }
-                if (parseInt(cardWrapperDom.value.style.height) >= 300) {
-                    cardWrapperDom.value.style.height = 300 + 'px';
-                }
-                if (parseInt(cardWrapperDom.value.style.height) <= 150) {
-                    cardWrapperDom.value.style.height = 150 + 'px';
+                    dynamicDom.value.style.height = (targetDivHeight - distY) + 'px';
                 }
             };
             document.onmouseup = function () {
-                    dynamicDom.value.style.height = targetDivHeight;
-                    cardWrapperDom.value.style.height = targetDivHeight;
+                let justifyStr = dynamicDom.value.style.height;
+                let justifyHeight = justifyStr.substring(0,justifyStr.length-2);
+                if(justifyHeight>300){
+                    dynamicDom.value.style.height = 300 + 'px';
+                    cardWrapperDom.value.style.height = 300 + 'px';
+                    }
+                 if(justifyHeight<35){
+                    dynamicDom.value.style.height = 0 + 'px';
+                    cardWrapperDom.value.style.height = 0 + 'px';
+                    isOpenDynamic.value = false;
+                    isCloseDynamic.value = false;
+                    }
                     isCanMove.value = false;
                     document.onmousemove = null;
             }
@@ -147,8 +154,6 @@ export default defineComponent({
 .answerWrapper
         position fixed
         bottom  0
-        max-height 300px
-        // min-height 35px
         height 0px
         width 100%
     .answerSheet
@@ -163,6 +168,7 @@ export default defineComponent({
             display flex
             justify-content flex-start
       .titleLeft
+            cursor pointer
             padding 0 21px
             width 59px
             margin-right 20px
@@ -171,11 +177,13 @@ export default defineComponent({
             border 1px solid hsla(0,0%,59.2%,.2) 
             border-bottom 0
          .answerCard
+            cursor pointer
             display inline-block
             margin-right 10px
         .closeTop
             bottom 0
       .dragTitle
+            cursor pointer
             height 25px
             line-height 25px
             font-size 16px
@@ -197,12 +205,17 @@ export default defineComponent({
             overflow-y auto
             background-color #fff
             width 1024px
-            max-height 300px
             box-shadow: rgba(219, 219, 219, 0.3) 0px -4px 15px 0px
             border 1px solid #eaeaea
         .cardBox
                 box-sizing border-box
                 padding 22px 24px 2px 24px
+            .cardTitle
+                    font-family PingFangSC-Regular,PingFang SC
+                    font-weight 400
+                    color #2a2e36
+                    font-size 16px
+                    margin-bottom 16px
             .cardLine
                     display flex
                     justify-content flex-start
@@ -217,6 +230,8 @@ export default defineComponent({
                   text-align center
                   border-radius 3px   
                 .isAlready
-                    color blue
+                    background rgba(24,144,255,.1);
+                    border 1px solid #1890ff
+                    color #1890ff;
 
 </style>
