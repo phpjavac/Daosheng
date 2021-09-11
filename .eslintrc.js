@@ -23,6 +23,7 @@ module.exports = {
     ],
     "prettier/prettier": "error",
     "import/no-extraneous-dependencies": "off",
+    // "linebreak-style": "off",
     "vue/no-multiple-template-root": "off", // vue3允许有多个根元素
   },
   settings: {
