@@ -1,13 +1,8 @@
-import { defineConfig } from 'vite'
-import { viteMockServe } from 'vite-plugin-mock'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import WindiCSS from "vite-plugin-windicss";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(),
-    viteMockServe({
-      // default
-      mockPath: 'mock',
-    }),
-  ]
-})
+  plugins: [vue(), WindiCSS()],
+});
