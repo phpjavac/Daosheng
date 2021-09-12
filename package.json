@@ -34,6 +34,7 @@
     "vite-plugin-style-import": "^1.2.1",
     "vite-plugin-windicss": "^1.4.2",
     "vue-tsc": "^0.2.2",
-    "windicss": "^3.1.7"
+    "windicss": "^3.1.7",
+    "zcomposition": "file:packages/composition"
   }
 }
