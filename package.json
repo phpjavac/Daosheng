@@ -8,8 +8,12 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^6.0.1",
+    "@vueuse/core": "^6.3.3",
     "axios": "^0.21.1",
     "mockjs": "^1.1.0",
+    "stylus": "^0.55.0",
+    "stylus-loader": "^6.1.0",
     "vue": "^3.2.6"
   },
   "devDependencies": {
