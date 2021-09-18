@@ -25,6 +25,8 @@ module.exports = {
     "import/no-extraneous-dependencies": "off",
     // "linebreak-style": "off",
     "vue/no-multiple-template-root": "off", // vue3允许有多个根元素
+    "import/no-extraneous-dependencies": "off", // package 引入包
+    "no-console": "off",
   },
   settings: {
     "import/resolver": {
