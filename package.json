@@ -5,7 +5,11 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "lint": "eslint --ext .ts,.js,.vue src",
+    "prepare": "husky install",
     "serve": "vite preview"
+  },
+  "lint-staged": {
+    "src/**/*.js": ["prettier --write"]
   },
   "dependencies": {
     "ant-design-vue": "^2.2.7",
@@ -17,16 +21,22 @@
     "vue-router": "^4.0.11"
   },
   "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
     "@typescript-eslint/eslint-plugin": "^4.29.3",
     "@typescript-eslint/parser": "^4.29.3",
     "@vitejs/plugin-vue": "^1.6.0",
     "@vue/compiler-sfc": "^3.0.5",
+    "commitlint-plugin-function-rules": "^1.4.0",
+    "devmoji": "^2.3.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-prettier": "^3.4.1",
     "eslint-plugin-vue": "^7.16.0",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2",
     "prettier": "^2.3.2",
     "typescript": "^4.3.2",
     "unplugin-vue-components": "^0.15.0",
