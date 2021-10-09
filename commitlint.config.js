@@ -44,7 +44,8 @@ module.exports = {
       2,
       "always",
       (parsed) => {
-        const helpMsg = `请填写 jira 任务号 或 issue 号 \neg:\n fix(DCAW-900): 修复跳转链接\n fix(#123): 修复跳转链接\n`;
+        const helpMsg =
+          "请填写 jira 任务号 或 issue 号 \neg:\n fix(DCAW-900): 修复跳转链接\n fix(#123): 修复跳转链接\n";
         const jiraScope = new RegExp(/[a-zA-Z]{2,20}-[0-9]{1,20}/, "g");
         const issueScope = new RegExp(/#[0-9]{1,20}/, "g");
         if (parsed.scope) {

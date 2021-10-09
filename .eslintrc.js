@@ -12,10 +12,10 @@ module.exports = {
   },
   extends: ["airbnb-base", "prettier", "plugin:vue/vue3-recommended"],
   rules: {
+    "no-param-reassign": ["error", { props: false }],
     "import/extensions": "off",
     "prettier/prettier": "warn",
     "no-unused-vars": "warn",
-    indent: ["error", 2],
     quotes: [1, "double"],
     "no-console": "off",
     "vue/html-self-closing": "off",
