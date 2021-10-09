@@ -38,5 +38,5 @@ Request.setResponse(
   (error) => {
     message.error(error.message);
     return Promise.reject(error);
-  }
+  },
 );

@@ -71,7 +71,7 @@ const publicS =
 console.log(
   before,
   after,
-  "after(left-385/1000 top-405/1000 w-2/100 h-5/100) https://github.com/windicss/windicss/issues/419"
+  "after(left-385/1000 top-405/1000 w-2/100 h-5/100) https://github.com/windicss/windicss/issues/419",
 );
 </script>
 
@@ -94,16 +94,16 @@ console.log(
         {{ msg }}
       </div>
       <input
-        type="file"
         ref="inputRef"
+        type="file"
         multiple="false"
-        @change.prevent="inputChange"
         accept="image/png, image/jpeg,image/jpg"
         class="absolute left-0 opacity-0 w-full h-full"
+        @change.prevent="inputChange"
       />
       <img
-        :src="avatar"
         v-show="avatar"
+        :src="avatar"
         class="absolute left-0px z-2 w-full h-full border-0 pointer-events-none"
       />
     </div>
