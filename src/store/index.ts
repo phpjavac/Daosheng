@@ -3,6 +3,7 @@
 import { createStore } from "vuex";
 
 const moduleFiles = import.meta.globEager("./modules/*.ts");
+
 const getModules = () => {
   const module: any = {};
   for (const path in moduleFiles) {

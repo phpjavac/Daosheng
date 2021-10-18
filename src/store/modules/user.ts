@@ -2,6 +2,8 @@ import { ActionTree, MutationTree, Module } from "vuex";
 
 class State {
   code = "admin";
+
+  role = "";
 }
 
 class User implements Module<State, unknown> {
