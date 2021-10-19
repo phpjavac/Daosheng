@@ -4,5 +4,5 @@ export default {
   /**
    * 用户登录
    */
-  auth: (credentials: any) => post("./api/user/login", credentials),
+  auth: (credentials: any) => post("/pmcp/api/user/login", credentials),
 };

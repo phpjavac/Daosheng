@@ -16,6 +16,7 @@ module.exports = {
     "import/extensions": "off",
     "prettier/prettier": "warn",
     "no-unused-vars": "warn",
+    "max-classes-per-file": ["error", 2],
     quotes: [1, "double"],
     "no-console": "off",
     "vue/html-self-closing": "off",
