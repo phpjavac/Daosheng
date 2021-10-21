@@ -1,6 +1,7 @@
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
 import { createStore } from "vuex";
+import getters from "./getters"
 
 const moduleFiles = import.meta.globEager("./modules/*.ts");
 
@@ -17,12 +18,8 @@ const getModules = () => {
 
 const modules = getModules();
 
-class State {
-  AVuexModules: string[] = [];
-}
-
 const store = createStore({
-  state: new State(),
+  getters,
   modules,
 });
 

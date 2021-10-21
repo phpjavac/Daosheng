@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { reactive } from "@vue/reactivity";
-import { Button, Input as aInput } from "ant-design-vue";
-import { useEffect } from "zcomposition";
+import { Button, Input as aInput, message } from "ant-design-vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+import { useEffect } from "zcomposition";
 import { version } from "../../package.json";
-import { UserService, SoftService } from "../services/index";
+import { SoftService } from "../services/index";
 
-const store = useStore();
-console.log(store.state);
-const { auth } = UserService;
+const router = useRouter()
+const store = useStore()
 const { softConfig } = SoftService;
 useEffect(() => {
   softConfig();
@@ -17,6 +17,15 @@ const userInfo = reactive({
   code: "",
   password: "",
 });
+
+const login = () => {
+  store.dispatch("user/login",userInfo).then(res => {
+    message.success("登陆成功")
+    router.push({path:"/Teacher"})
+  }).catch(err => {
+    message.error(err)
+  })
+};
 </script>
 
 <template>
@@ -48,11 +57,11 @@ const userInfo = reactive({
           type="password"
           class="!mt-28px"
         />
-        <Button
+        <Button 
           type="primary"
           class="mt-24px !h-40px"
           block
-          @click="auth(userInfo)"
+          @click="login()"
         >
           登录
         </Button>
