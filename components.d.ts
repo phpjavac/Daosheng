@@ -4,14 +4,10 @@
 
 declare module "vue" {
   export interface GlobalComponents {
-    404: typeof import("./src/components/public/404.vue")["default"]
     ABreadcrumbItem: typeof import("ant-design-vue/es")["BreadcrumbItem"]
     AFormItem: typeof import("ant-design-vue/es")["FormItem"]
     ATextarea: typeof import("ant-design-vue/es")["Textarea"]
-    AvatarInfo: typeof import("./src/components/avatarInfo.vue")["default"]
-    Bread: typeof import("./src/components/bread.vue")["default"]
     Breadcrumb: typeof import("./src/components/breadcrumb.vue")["default"]
-    N: typeof import("./src/components/n.vue")["default"]
     Navigate: typeof import("./src/components/navigate.vue")["default"]
     UploadImg: typeof import("./src/components/tools/UploadImg.vue")["default"]
   }
