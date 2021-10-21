@@ -2,9 +2,12 @@
 import { reactive } from "@vue/reactivity";
 import { Button, Input as aInput } from "ant-design-vue";
 import { useEffect } from "zcomposition";
+import { useStore } from "vuex";
 import { version } from "../../package.json";
 import { UserService, SoftService } from "../services/index";
 
+const store = useStore();
+console.log(store.state);
 const { auth } = UserService;
 const { softConfig } = SoftService;
 useEffect(() => {

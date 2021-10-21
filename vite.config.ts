@@ -4,10 +4,16 @@ import WindiCSS from "vite-plugin-windicss";
 import Components from "unplugin-vue-components/vite";
 import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 import styleImport from "vite-plugin-style-import";
+import path from "path";
 import generateModifyVars from "./build/style/generateModifyVars";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "src"),
+    },
+  },
   plugins: [
     vue(),
     WindiCSS(),

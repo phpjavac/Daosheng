@@ -14,12 +14,21 @@ module.exports = {
   rules: {
     "no-param-reassign": ["error", { props: false }],
     "import/extensions": "off",
-    "prettier/prettier": "warn",
+    "no-restricted-syntax": [
+      "error",
+      "WithStatement",
+      "BinaryExpression[operator='in']",
+    ],
+    "prettier/prettier": [
+      "warn",
+      { parser: "flow", "Embedded Language Formatting": "auto" },
+    ],
     "no-unused-vars": "warn",
     "max-classes-per-file": ["error", 2],
     quotes: [1, "double"],
     "no-console": "off",
     "vue/html-self-closing": "off",
+    "vue/no-unused-vars": "off",
     "vue/singleline-html-element-content-newline": "off",
     "import/no-extraneous-dependencies": "off", // package 引入包
   },
