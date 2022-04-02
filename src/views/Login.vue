@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive } from "@vue/reactivity";
+import { reactive } from "vue";
 import { Button, Input as aInput } from "ant-design-vue";
 import { useEffect } from "zcomposition";
 import { version } from "../../package.json";

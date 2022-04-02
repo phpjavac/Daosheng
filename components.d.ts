@@ -4,7 +4,7 @@
 
 declare module "vue" {
   export interface GlobalComponents {
-    UploadImg: typeof import("./src/components/tools/UploadImg.vue")["default"];
+    UploadImg: typeof import("D:/ropo/Daosheng/src/components/tools/UploadImg.vue")["default"];
   }
 }
 
