@@ -3,4 +3,5 @@
         "source.fixAll.eslint": true
     },
     "eslint.lintTask.enable": true,
+    "files.eol": "\n"
 }

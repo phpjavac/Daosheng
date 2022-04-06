@@ -10,8 +10,14 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ["airbnb-base", "prettier", "plugin:vue/vue3-recommended"],
+  extends: [
+    "airbnb-base",
+    "prettier",
+    "plugin:vue/vue3-recommended",
+    "plugin:prettier/recommended",
+  ],
   rules: {
+    "import/no-unresolved": [2, { ignore: ["src"] }],
     "no-param-reassign": ["error", { props: false }],
     "import/extensions": "off",
     "prettier/prettier": "warn",

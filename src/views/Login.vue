@@ -1,15 +1,10 @@
 <script setup lang="ts">
 import { reactive } from "vue";
 import { Button, Input as aInput } from "ant-design-vue";
-import { useEffect } from "zcomposition";
 import { version } from "../../package.json";
-import { UserService, SoftService } from "../services/index";
+import SoftConfig from "../compostion/soft_config";
 
-const { auth } = UserService;
-const { softConfig } = SoftService;
-useEffect(() => {
-  softConfig();
-});
+const { copyRightValue, softName } = SoftConfig().getSoftConfig();
 const userInfo = reactive({
   code: "",
   password: "",
@@ -27,7 +22,7 @@ const userInfo = reactive({
           alt="logo"
           class="logo mr-4 rounded-1 w-44px"
         />
-        <p class="text-3xl text-[#fff]">Daosheng 道生万物</p>
+        <p class="text-3xl text-[#fff]">{{ softName }}</p>
       </div>
       <div class="bg-[#fff] mt-36px py-30px px-28px text-center rounded-[8px]">
         <h1 class="text-[20px]">登录</h1>
@@ -45,17 +40,10 @@ const userInfo = reactive({
           type="password"
           class="!mt-28px"
         />
-        <Button
-          type="primary"
-          class="mt-24px !h-40px"
-          block
-          @click="auth(userInfo)"
-        >
-          登录
-        </Button>
+        <Button type="primary" class="mt-24px !h-40px" block> 登录 </Button>
         <div>
           <div class="copyright text-[14px] text-gray-500 mt-28px">
-            © 2010 findsoft 海拉鲁王国依盖队海拉鲁大陆分社
+            {{ copyRightValue }}
           </div>
           <div class="line h-1px bg-[#ccc] my-8px"></div>
           <div class="version text-[14px] text-gray-500">V{{ version }}</div>

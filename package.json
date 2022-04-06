@@ -1,8 +1,9 @@
 {
   "name": "daosheng",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
-    "dev": "vite",
+    "types": "openapi-typescript http://127.0.0.1:4523/export/openapi/2 --output src/types/petstore.ts",
+    "dev": "vite --port 8080",
     "build": "vue-tsc --noEmit && vite build",
     "lint": "eslint --fix --ext .ts,.js,.vue src",
     "prepare": "husky install && node ./scripts/commitMsgHook.js",
@@ -50,6 +51,7 @@
     "husky": "^7.0.4",
     "lint-staged": "^11.2.6",
     "lodash": "^4.17.21",
+    "openapi-typescript": "^5.2.0",
     "prettier": "^2.6.1",
     "typescript": "^4.6.3",
     "unplugin-vue-components": "^0.15.6",
