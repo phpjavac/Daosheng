@@ -4,6 +4,8 @@
 
 declare module "vue" {
   export interface GlobalComponents {
+    AsyncButton: typeof import("D:/ropo/Daosheng/src/components/ui/asyncButton.vue")["default"];
+    Header: typeof import("D:/ropo/Daosheng/src/components/home/header.vue")["default"];
     UploadImg: typeof import("D:/ropo/Daosheng/src/components/tools/UploadImg.vue")["default"];
   }
 }

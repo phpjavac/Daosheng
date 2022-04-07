@@ -4,3 +4,4 @@ dist
 dist-ssr
 *.local
 packages
+components.d.ts

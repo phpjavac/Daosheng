@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { reactive } from "vue";
-import { Button, Input as aInput } from "ant-design-vue";
+import { Input as aInput } from "ant-design-vue";
+import asyncButton from "../components/ui/asyncButton.vue";
 import { version } from "../../package.json";
-import SoftConfig from "../compostion/soft_config";
+import { SoftConfig, useUser } from "../compostion";
 
+const { login } = useUser();
 const { copyRightValue, softName } = SoftConfig().getSoftConfig();
 const userInfo = reactive({
   code: "",
@@ -40,7 +42,14 @@ const userInfo = reactive({
           type="password"
           class="!mt-28px"
         />
-        <Button type="primary" class="mt-24px !h-40px" block> 登录 </Button>
+        <async-button
+          type="primary"
+          class="mt-24px !h-40px"
+          block
+          @click="login(userInfo)"
+        >
+          登录
+        </async-button>
         <div>
           <div class="copyright text-[14px] text-gray-500 mt-28px">
             {{ copyRightValue }}
