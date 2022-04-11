@@ -97,8 +97,8 @@ const nowDate = dayjs().add(-31, "day");
 <template>
   <div class="border-gray-500 border-7 p-24px mb-36px">
     <a-row justify="center">
-      <a-col>
-        <h1 class="text-4xl">
+      <a-col :span="16">
+        <h1 class="text-4xl border-l-5 border-blue-500 pl-12px">
           事件热度走势
           <span class="text-2xl"
             >事件开始时间为{{ nowDate.format("YYYY/DDMM") }}</span
@@ -106,7 +106,7 @@ const nowDate = dayjs().add(-31, "day");
         </h1>
         <div ref="chartDom" class="h-60vh w-60vw"></div>
       </a-col>
-      <a-col>
+      <a-col :span="8">
         <div class="w-30vw">
           <h1 class="text-4xl">事件热词</h1>
           <div ref="yunDom" class="h-15vw w-30vw"></div>
@@ -114,5 +114,12 @@ const nowDate = dayjs().add(-31, "day");
       </a-col>
     </a-row>
   </div>
-  <div class="border-gray-500 border-7 p-24px"></div>
+  <div class="border-gray-500 border-7 p-24px">
+    <a-row>
+      <a-col :span="16">
+        <h1 class="text-4xl border-l-5 border-blue-500 pl-12px">舆情分析</h1>
+      </a-col>
+      <a-col :span="8"></a-col>
+    </a-row>
+  </div>
 </template>

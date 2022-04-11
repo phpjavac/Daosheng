@@ -9,9 +9,9 @@ declare module 'vue' {
     AList: typeof import('ant-design-vue/es')['List']
     AListItem: typeof import('ant-design-vue/es')['ListItem']
     ARow: typeof import('ant-design-vue/es')['Row']
-    AsyncButton: typeof import('D:/ropo/Daosheng/src/components/ui/asyncButton.vue')['default']
-    Header: typeof import('D:/ropo/Daosheng/src/components/home/header.vue')['default']
-    UploadImg: typeof import('D:/ropo/Daosheng/src/components/tools/UploadImg.vue')['default']
+    AsyncButton: typeof import('D:/ropo/mvp/Daosheng/src/components/ui/asyncButton.vue')['default']
+    Header: typeof import('D:/ropo/mvp/Daosheng/src/components/home/header.vue')['default']
+    UploadImg: typeof import('D:/ropo/mvp/Daosheng/src/components/tools/UploadImg.vue')['default']
   }
 }
 

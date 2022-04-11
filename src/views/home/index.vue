@@ -58,11 +58,11 @@ onMounted(() => {
 <template>
   <div class="border-gray-500 border-7 p-24px mb-36px">
     <a-row justify="center">
-      <a-col>
+      <a-col :span="16">
         <h1 class="text-4xl">热度走势</h1>
         <div ref="chartDom" class="h-60vh w-60vw"></div>
       </a-col>
-      <a-col>
+      <a-col :span="8">
         <div class="w-30vw">
           <a-row justify="space-between">
             <a-col>
