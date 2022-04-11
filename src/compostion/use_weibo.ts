@@ -22,6 +22,33 @@ const UseWeibo = () => {
     }[]
   >([]);
 
+  const getListData = () => {
+    const listData = [];
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < 23; i++) {
+      listData.push({
+        index: i,
+        isOpen: false,
+        href: "https://www.antdv.com/",
+        title: `名字 ${i}`,
+        avatar: "https://joeschmoe.io/api/v1/random",
+        comment: { value: "153", isRead: false },
+        forwarding: { value: "150", isRead: false },
+        giveALike: { value: "151", isRead: false },
+        content:
+          "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.",
+      });
+    }
+    return listData;
+  };
+  const listData = reactive(getListData());
+  const pagination = {
+    onChange: (page: number) => {
+      console.log(page);
+    },
+    pageSize: 3,
+  };
+
   const getWeiboTopMostChart = (date: Dayjs, dom: HTMLElement) => {
     return new Promise<void>((resolve) => {
       if (!charts) {
@@ -100,6 +127,8 @@ const UseWeibo = () => {
     hotWeibolist,
     hotWeiboChart,
     wordcloudData,
+    listData,
+    pagination,
     getWordcloudData,
     getWeiboTopMostList,
     getWeiboTopMostChart,
