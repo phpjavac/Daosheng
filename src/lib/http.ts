@@ -58,7 +58,7 @@ const get = <R = any, P = any>(
   config: AxiosRequestConfig = getRequestConfig,
 ): Promise<R> => {
   config.params = data;
-  return http.get(url, config);
+  return http.get(url, config).then((res) => res.data);
 };
 
 /**
@@ -98,7 +98,7 @@ const postJson = <R = any, P = any>(
   url: string,
   data?: P,
   config: AxiosRequestConfig = postJsonRequestConfig,
-): Promise<R> => http.post(url, data || {}, config);
+): Promise<R> => http.post(url, data || {}, config).then((res) => res.data);
 
 /**
  * Post FormBody

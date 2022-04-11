@@ -10,6 +10,13 @@ const routes = [
       {
         path: "",
         component: () => import("../views/home/index.vue"),
+        children: [
+          {
+            path: "weibo/info/:id",
+            name: "weiboInfo",
+            component: () => import("../views/home/weibo/weiboInfo.vue"),
+          },
+        ],
       },
     ],
   },

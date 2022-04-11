@@ -4,6 +4,28 @@
  */
 
 export interface paths {
+  "/api/wb/wordcloud/{id}": {
+    get: {
+      parameters: {
+        path: {
+          id: string;
+        };
+      };
+      responses: {
+        /** 成功 */
+        200: {
+          content: {
+            "application/json": {
+              code: string;
+              msg: string;
+              success: boolean;
+              data: components["schemas"]["%E8%AF%8D%E4%BA%91"];
+            };
+          };
+        };
+      };
+    };
+  };
   "/api/softConfig/get": {
     get: {
       parameters: {};
@@ -12,6 +34,32 @@ export interface paths {
         200: {
           content: {
             "application/json": components["schemas"]["%E8%BD%AF%E4%BB%B6%E4%BF%A1%E6%81%AF"];
+          };
+        };
+      };
+    };
+  };
+  "/api/wb/top/most/list": {
+    post: {
+      parameters: {};
+      responses: {
+        /** 成功 */
+        200: {
+          content: {
+            "application/json": {
+              msg: string;
+              code: number;
+              data: components["schemas"]["%E7%83%AD%E5%BA%A6%E6%8E%92%E5%90%8D"];
+              /** 是否成功 */
+              success: boolean;
+            };
+          };
+        };
+      };
+      requestBody: {
+        content: {
+          "application/json": {
+            date: string;
           };
         };
       };
@@ -38,21 +86,36 @@ export interface paths {
       };
     };
   };
+  "/api/wb/top/most/trend/chart": {
+    post: {
+      parameters: {};
+      responses: {
+        /** 成功 */
+        200: {
+          content: {
+            "application/json": {
+              msg: string;
+              code: number;
+              data: components["schemas"]["%E8%BF%9130%E5%A4%A9%E7%83%AD%E5%BA%A6%E8%B5%B0%E5%8A%BF"];
+              /** 是否成功 */
+              success: boolean;
+            };
+          };
+        };
+      };
+      requestBody: {
+        content: {
+          "application/json": {
+            date: string;
+          };
+        };
+      };
+    };
+  };
 }
 
 export interface components {
   schemas: {
-    "全局响应结果(试用)": {
-      /**
-       * 业务代码
-       * @description 暂定范围 10000~99999
-       */
-      code?: number;
-      /** 信息 */
-      msg?: string | null;
-      /** 数据 */
-      data?: { [key: string]: unknown } | null;
-    };
     登录返回值: {
       success: boolean;
       message?: string;
@@ -74,8 +137,32 @@ export interface components {
       /**
        * 事件Id
        * @description 功能主键
+       * @default 1
        */
       id: string;
+    }[];
+    "全局响应结果-热度排名(试用)": {
+      msg: string;
+      code: number;
+      data: {
+        keyword: string;
+        heat: number;
+        id: string;
+      }[];
+    };
+    近30天热度走势: {
+      date: string[];
+      list: {
+        /** @description 热搜名字 */
+        name: string;
+        /** @description 热搜近30天数据（按照时间排序） */
+        data: number[];
+        id: string;
+      }[];
+    };
+    词云: {
+      value: number;
+      name: string;
     }[];
     软件信息: {
       copyRightValue: string;
