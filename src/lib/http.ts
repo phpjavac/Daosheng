@@ -58,7 +58,7 @@ const get = <R = any, P = any>(
   config: AxiosRequestConfig = getRequestConfig,
 ): Promise<R> => {
   config.params = data;
-  return http.get(url, config).then((res) => res.data);
+  return http.get(url, config).then((res) => (res.data ? res.data : res));
 };
 
 /**
