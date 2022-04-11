@@ -7,6 +7,7 @@ import { useRoute } from "vue-router";
 import { HotWeiboChartList } from "../../../compostion/use_weibo";
 import wordCloudImg from "../../../assets/wordCloud.png";
 import { useWeibo } from "../../../compostion";
+import theEmotion from "../../../components/home/weibo/emotion.vue";
 import "echarts-wordcloud";
 
 const route = useRoute();
@@ -114,12 +115,6 @@ const nowDate = dayjs().add(-31, "day");
       </a-col>
     </a-row>
   </div>
-  <div class="border-gray-500 border-7 p-24px">
-    <a-row>
-      <a-col :span="16">
-        <h1 class="text-4xl border-l-5 border-blue-500 pl-12px">舆情分析</h1>
-      </a-col>
-      <a-col :span="8"></a-col>
-    </a-row>
-  </div>
+
+  <the-emotion></the-emotion>
 </template>

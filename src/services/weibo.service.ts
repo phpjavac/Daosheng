@@ -25,4 +25,10 @@ export default {
       },
     );
   },
+  getWeiboEmotion(id: string) {
+    return get<components["schemas"]["用户情绪"]>(`./api/wb/emotion/${id}`);
+  },
+  getWeiboEmotionMap(id: string) {
+    return get<components["schemas"]["地区情绪"]>(`./api/wb/emotion/map/${id}`);
+  },
 };

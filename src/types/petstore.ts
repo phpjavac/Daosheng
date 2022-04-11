@@ -4,6 +4,32 @@
  */
 
 export interface paths {
+  "/api/wb/top/most/trend/chart": {
+    post: {
+      parameters: {};
+      responses: {
+        /** 成功 */
+        200: {
+          content: {
+            "application/json": {
+              msg: string;
+              code: number;
+              data: components["schemas"]["%E8%BF%9130%E5%A4%A9%E7%83%AD%E5%BA%A6%E8%B5%B0%E5%8A%BF"];
+              /** 是否成功 */
+              success: boolean;
+            };
+          };
+        };
+      };
+      requestBody: {
+        content: {
+          "application/json": {
+            date: string;
+          };
+        };
+      };
+    };
+  };
   "/api/wb/wordcloud/{id}": {
     get: {
       parameters: {
@@ -26,6 +52,28 @@ export interface paths {
       };
     };
   };
+  "/api/wb/emotion/map/{id}": {
+    get: {
+      parameters: {
+        path: {
+          id: string;
+        };
+      };
+      responses: {
+        /** 成功 */
+        200: {
+          content: {
+            "application/json": {
+              msg: string;
+              success: boolean;
+              code: number;
+              data: components["schemas"]["%E5%9C%B0%E5%8C%BA%E6%83%85%E7%BB%AA"];
+            };
+          };
+        };
+      };
+    };
+  };
   "/api/softConfig/get": {
     get: {
       parameters: {};
@@ -34,6 +82,49 @@ export interface paths {
         200: {
           content: {
             "application/json": components["schemas"]["%E8%BD%AF%E4%BB%B6%E4%BF%A1%E6%81%AF"];
+          };
+        };
+      };
+    };
+  };
+  "/api/user/login": {
+    post: {
+      parameters: {};
+      responses: {
+        /** 成功 */
+        200: {
+          content: {
+            "application/json": components["schemas"]["%E7%99%BB%E5%BD%95%E8%BF%94%E5%9B%9E%E5%80%BC"];
+          };
+        };
+      };
+      requestBody: {
+        content: {
+          "application/json": {
+            code: string;
+            password: string;
+          };
+        };
+      };
+    };
+  };
+  "/api/wb/emotion/{id}": {
+    get: {
+      parameters: {
+        path: {
+          id: string;
+        };
+      };
+      responses: {
+        /** 成功 */
+        200: {
+          content: {
+            "application/json": {
+              msg: string;
+              success: string;
+              code: string;
+              data: components["schemas"]["%E7%94%A8%E6%88%B7%E6%83%85%E7%BB%AA"];
+            };
           };
         };
       };
@@ -65,67 +156,17 @@ export interface paths {
       };
     };
   };
-  "/api/user/login": {
-    post: {
-      parameters: {};
-      responses: {
-        /** 成功 */
-        200: {
-          content: {
-            "application/json": components["schemas"]["%E7%99%BB%E5%BD%95%E8%BF%94%E5%9B%9E%E5%80%BC"];
-          };
-        };
-      };
-      requestBody: {
-        content: {
-          "application/json": {
-            code: string;
-            password: string;
-          };
-        };
-      };
-    };
-  };
-  "/api/wb/top/most/trend/chart": {
-    post: {
-      parameters: {};
-      responses: {
-        /** 成功 */
-        200: {
-          content: {
-            "application/json": {
-              msg: string;
-              code: number;
-              data: components["schemas"]["%E8%BF%9130%E5%A4%A9%E7%83%AD%E5%BA%A6%E8%B5%B0%E5%8A%BF"];
-              /** 是否成功 */
-              success: boolean;
-            };
-          };
-        };
-      };
-      requestBody: {
-        content: {
-          "application/json": {
-            date: string;
-          };
-        };
-      };
-    };
-  };
 }
 
 export interface components {
   schemas: {
-    登录返回值: {
-      success: boolean;
-      message?: string;
-      data?: {
-        code: string;
-        name: string;
-        role: string;
-        token: string;
+    地区情绪: {
+      province: components["schemas"]["%E4%B8%AD%E5%9B%BD%E5%9F%8E%E5%B8%82%E5%88%97%E8%A1%A8"];
+      emotion: {
+        low: number;
+        high: number;
       };
-    };
+    }[];
     热度排名: {
       /** 事件名称 */
       keyword: string;
@@ -141,15 +182,6 @@ export interface components {
        */
       id: string;
     }[];
-    "全局响应结果-热度排名(试用)": {
-      msg: string;
-      code: number;
-      data: {
-        keyword: string;
-        heat: number;
-        id: string;
-      }[];
-    };
     近30天热度走势: {
       date: string[];
       list: {
@@ -160,10 +192,64 @@ export interface components {
         id: string;
       }[];
     };
-    词云: {
-      value: number;
-      name: string;
-    }[];
+    用户情绪: {
+      gender: {
+        female: number;
+        male: number;
+      };
+      emotion: {
+        low: number;
+        high: number;
+      };
+      maleEmotion: {
+        low: number;
+        high: number;
+      };
+      femaleEmotion: {
+        low: number;
+        high: number;
+      };
+    };
+    login: {
+      code: string;
+      password: string;
+    };
+    /** @enum {string} */
+    中国城市列表:
+      | "河北"
+      | "山西"
+      | "内蒙古"
+      | "辽宁"
+      | "吉林"
+      | "黑龙江"
+      | "江苏"
+      | "浙江"
+      | "安徽"
+      | "福建"
+      | "江西"
+      | "山东"
+      | "河南"
+      | "湖北"
+      | "湖南"
+      | "广东"
+      | "广西"
+      | "海南"
+      | "四川"
+      | "贵州"
+      | "云南"
+      | "陕西"
+      | "甘肃"
+      | "青海"
+      | "西藏"
+      | "宁夏"
+      | "新疆"
+      | "台湾"
+      | "北京"
+      | "天津"
+      | "上海"
+      | "重庆"
+      | "香港"
+      | "澳门";
     软件信息: {
       copyRightValue: string;
       softName: string;
@@ -171,9 +257,28 @@ export interface components {
       useCas: string;
       message: string | null;
     };
-    login: {
-      code: string;
-      password: string;
+    登录返回值: {
+      success: boolean;
+      message?: string;
+      data?: {
+        code: string;
+        name: string;
+        role: string;
+        token: string;
+      };
+    };
+    词云: {
+      value: number;
+      name: string;
+    }[];
+    "全局响应结果-热度排名(试用)": {
+      msg: string;
+      code: number;
+      data: {
+        keyword: string;
+        heat: number;
+        id: string;
+      }[];
     };
   };
 }

@@ -86,6 +86,16 @@ const UseWeibo = () => {
       wordcloudData.value = res;
     });
   };
+  /** 查询用户情绪 */
+  const getWeiboEmotion = async (id: string) => {
+    const res = await await WeiboService.getWeiboEmotion(id);
+    return res;
+  };
+  /** 查询地区情绪 */
+  const getWeiboEmotionMap = async (id: string) => {
+    const res = await WeiboService.getWeiboEmotionMap(id);
+    return res;
+  };
   return {
     hotWeibolist,
     hotWeiboChart,
@@ -93,6 +103,8 @@ const UseWeibo = () => {
     getWordcloudData,
     getWeiboTopMostList,
     getWeiboTopMostChart,
+    getWeiboEmotion,
+    getWeiboEmotionMap,
   };
 };
 export default UseWeibo;
