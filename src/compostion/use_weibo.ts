@@ -3,6 +3,7 @@ import type { Dayjs } from "dayjs";
 import * as echarts from "echarts";
 import { WeiboService } from "../services/index";
 import { components } from "../types/petstore";
+import { getItem } from "../lib/storage";
 
 export type HotWeiboChartList = components["schemas"]["近30天热度走势"];
 const UseWeibo = () => {
@@ -22,27 +23,8 @@ const UseWeibo = () => {
     }[]
   >([]);
 
-  const getListData = () => {
-    const listData = [];
-    // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < 23; i++) {
-      listData.push({
-        index: i,
-        isOpen: false,
-        isReplyContent: false,
-        releaseTime: "2022-03-09 18:00",
-        title: `名字 ${i}`,
-        avatar: "https://joeschmoe.io/api/v1/random",
-        commentValue: "153",
-        forwardingValue: "150",
-        giveALikeValue: "151",
-        content:
-          "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.",
-      });
-    }
-    return listData;
-  };
-  const listData = reactive(getListData());
+  const commrntData = reactive(WeiboService.getCcommrntData());
+  const listData = reactive(WeiboService.getListData());
   const pagination = {
     onChange: (page: number) => {
       console.log(page);
@@ -139,6 +121,7 @@ const UseWeibo = () => {
     wordcloudData,
     listData,
     pagination,
+    commrntData,
     getWordcloudData,
     getWeiboTopMostList,
     getWeiboTopMostChart,
