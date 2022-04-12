@@ -29,12 +29,13 @@ const UseWeibo = () => {
       listData.push({
         index: i,
         isOpen: false,
-        href: "https://www.antdv.com/",
+        isReplyContent: false,
+        releaseTime: "2022-03-09 18:00",
         title: `名字 ${i}`,
         avatar: "https://joeschmoe.io/api/v1/random",
-        comment: { value: "153", isRead: false },
-        forwarding: { value: "150", isRead: false },
-        giveALike: { value: "151", isRead: false },
+        commentValue: "153",
+        forwardingValue: "150",
+        giveALikeValue: "151",
         content:
           "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.",
       });
@@ -46,7 +47,16 @@ const UseWeibo = () => {
     onChange: (page: number) => {
       console.log(page);
     },
+    total: listData.length,
+    // current: 1,
+    // defaultPageSize: 3,
     pageSize: 3,
+    pageSizeOptions: ["10", "20", "30", "40", "100"],
+    defaultCurrent: 1,
+    defaultPageSize: 10,
+    showQuickJumper: true,
+    showSizeChanger: true,
+    hideOnSinglePage: true,
   };
 
   const getWeiboTopMostChart = (date: Dayjs, dom: HTMLElement) => {
