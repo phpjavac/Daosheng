@@ -22,6 +22,43 @@ const UseWeibo = () => {
     }[]
   >([]);
 
+  const getListData = () => {
+    const listData = [];
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < 23; i++) {
+      listData.push({
+        index: i,
+        isOpen: false,
+        isReplyContent: false,
+        releaseTime: "2022-03-09 18:00",
+        title: `名字 ${i}`,
+        avatar: "https://joeschmoe.io/api/v1/random",
+        commentValue: "153",
+        forwardingValue: "150",
+        giveALikeValue: "151",
+        content:
+          "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.",
+      });
+    }
+    return listData;
+  };
+  const listData = reactive(getListData());
+  const pagination = {
+    onChange: (page: number) => {
+      console.log(page);
+    },
+    total: listData.length,
+    // current: 1,
+    // defaultPageSize: 3,
+    pageSize: 3,
+    pageSizeOptions: ["10", "20", "30", "40", "100"],
+    defaultCurrent: 1,
+    defaultPageSize: 10,
+    showQuickJumper: true,
+    showSizeChanger: true,
+    hideOnSinglePage: true,
+  };
+
   const getWeiboTopMostChart = (date: Dayjs, dom: HTMLElement) => {
     return new Promise<void>((resolve) => {
       if (!charts) {
@@ -100,6 +137,8 @@ const UseWeibo = () => {
     hotWeibolist,
     hotWeiboChart,
     wordcloudData,
+    listData,
+    pagination,
     getWordcloudData,
     getWeiboTopMostList,
     getWeiboTopMostChart,
