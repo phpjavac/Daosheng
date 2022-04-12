@@ -1,7 +1,12 @@
 <script lang="ts">
 export default {
   name: "CommrntList",
-  props: ["commrntData"],
+  props: {
+    commrntData: {
+      type: Array,
+      required: true,
+    },
+  },
 };
 </script>
 <template>

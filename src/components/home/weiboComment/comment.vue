@@ -9,7 +9,7 @@ import zhCN from "ant-design-vue/es/locale/zh_CN";
 import { useWeibo } from "../../../compostion";
 import commrntList from "./commentList.vue";
 
-const { pagination, listData } = useWeibo();
+const { pagination, listData, commrntData } = useWeibo();
 
 // 展开内容
 const setIsOpen = (index: number, boolean: boolean) => {
@@ -21,53 +21,6 @@ const setComment = (index: number, boolean: boolean) => {
   listData[index].isReplyContent = boolean;
   return listData;
 };
-const commrntData = reactive([
-  {
-    releaseTime: "2022-03-09 18:00",
-    title: "name1-1",
-    avatar: "https://joeschmoe.io/api/v1/random",
-    content: "We supply a series of design principles.",
-    children: [
-      {
-        releaseTime: "2022-03-09 18:00",
-        title: "name1-2",
-        avatar: "https://joeschmoe.io/api/v1/random",
-        content: "We supply a series of design principles.",
-        children: [
-          {
-            releaseTime: "2022-03-09 18:00",
-            title: "name1-3",
-            avatar: "https://joeschmoe.io/api/v1/random",
-            content: "We supply a series of design principles.",
-            children: [
-              {
-                releaseTime: "2022-03-09 18:00",
-                title: "name1-4",
-                avatar: "https://joeschmoe.io/api/v1/random",
-                content: "We supply a series of design principles.",
-                children: [],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        releaseTime: "2022-03-09 18:00",
-        title: "name1",
-        avatar: "https://joeschmoe.io/api/v1/random",
-        content: "We supply a series of design principles.",
-        children: [],
-      },
-      {
-        releaseTime: "2022-03-09 18:00",
-        title: "name1",
-        avatar: "https://joeschmoe.io/api/v1/random",
-        content: "We supply a series of design principles.",
-        children: [],
-      },
-    ],
-  },
-]);
 </script>
 
 <template>
