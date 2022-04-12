@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@ant-design/icons-vue': ^6.1.0
   '@commitlint/cli': ^13.2.1
   '@commitlint/config-conventional': ^13.2.0
   '@types/lodash': ^4.14.181
@@ -49,6 +50,7 @@ specifiers:
   zcomposition: 0.8.1
 
 dependencies:
+  '@ant-design/icons-vue': 6.1.0_vue@3.2.31
   ant-design-vue: 3.1.1_vue@3.2.31
   axios: 0.21.4
   dayjs: 1.11.0

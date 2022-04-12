@@ -4,7 +4,6 @@ import {
   LikeOutlined,
   ExportOutlined,
 } from "@ant-design/icons-vue";
-import { reactive } from "@vue/reactivity";
 import zhCN from "ant-design-vue/es/locale/zh_CN";
 import { useWeibo } from "../../../compostion";
 import commrntList from "./commentList.vue";
