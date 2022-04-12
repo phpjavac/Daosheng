@@ -3,6 +3,7 @@ import type { Dayjs } from "dayjs";
 import * as echarts from "echarts";
 import { WeiboService } from "../services/index";
 import { components } from "../types/petstore";
+import { getItem } from "../lib/storage";
 
 export type HotWeiboChartList = components["schemas"]["近30天热度走势"];
 const UseWeibo = () => {
@@ -21,6 +22,24 @@ const UseWeibo = () => {
       name: string;
     }[]
   >([]);
+
+  const commrntData = reactive(WeiboService.getCcommrntData());
+  const listData = reactive(WeiboService.getListData());
+  const pagination = {
+    onChange: (page: number) => {
+      console.log(page);
+    },
+    total: listData.length,
+    // current: 1,
+    // defaultPageSize: 3,
+    pageSize: 3,
+    pageSizeOptions: ["10", "20", "30", "40", "100"],
+    defaultCurrent: 1,
+    defaultPageSize: 10,
+    showQuickJumper: true,
+    showSizeChanger: true,
+    hideOnSinglePage: true,
+  };
 
   const getWeiboTopMostChart = (date: Dayjs, dom: HTMLElement) => {
     return new Promise<void>((resolve) => {
@@ -100,6 +119,9 @@ const UseWeibo = () => {
     hotWeibolist,
     hotWeiboChart,
     wordcloudData,
+    listData,
+    pagination,
+    commrntData,
     getWordcloudData,
     getWeiboTopMostList,
     getWeiboTopMostChart,

@@ -4,16 +4,19 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AAvatar: typeof import('ant-design-vue/es')['Avatar']
     ACol: typeof import('ant-design-vue/es')['Col']
     ADatePicker: typeof import('ant-design-vue/es')['DatePicker']
     AList: typeof import('ant-design-vue/es')['List']
     AListItem: typeof import('ant-design-vue/es')['ListItem']
+    AListItemMeta: typeof import('ant-design-vue/es')['ListItemMeta']
     ARow: typeof import('ant-design-vue/es')['Row']
-    AsyncButton: typeof import('D:/ropo/mvp/Daosheng/src/components/ui/asyncButton.vue')['default']
-    ChinaEmotion: typeof import('D:/ropo/mvp/Daosheng/src/components/home/weibo/chinaEmotion.vue')['default']
-    Emotion: typeof import('D:/ropo/mvp/Daosheng/src/components/home/weibo/emotion.vue')['default']
-    Header: typeof import('D:/ropo/mvp/Daosheng/src/components/home/header.vue')['default']
-    UploadImg: typeof import('D:/ropo/mvp/Daosheng/src/components/tools/UploadImg.vue')['default']
+    AsyncButton: typeof import('./src/components/ui/asyncButton.vue')['default']
+    ChinaEmotion: typeof import('./src/components/home/weibo/chinaEmotion.vue')['default']
+    Comment: typeof import('./src/components/home/weiboComment/comment.vue')['default']
+    Emotion: typeof import('./src/components/home/weibo/emotion.vue')['default']
+    Header: typeof import('./src/components/home/header.vue')['default']
+    UploadImg: typeof import('./src/components/tools/UploadImg.vue')['default']
   }
 }
 
